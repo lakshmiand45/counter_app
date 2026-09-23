@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: ' counter',
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -28,15 +28,19 @@ class MyApp extends StatelessWidget {
         //
         // This works for code too, not just values: Most code changes can be
         // tested with just a hot reload.
-        colorScheme: .fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: .fromSeed(seedColor:Colors.purple),
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+   MyHomePage({super.key, required this.title}) 
+   {
+   // Runs every time a NEW MyHomePage widget object is created.
+     debugPrint('WIDGET class created (MyHomePage constructor)');
+  }
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -56,6 +60,19 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
+  @override
+  void initState() {
+    super.initState();
+    // Runs ONCE, when the State object is first created.
+    print('STATE class created (initState) — counter starts at $_counter');
+  }
+
+  @override
+  void dispose() {
+    print('STATE class destroyed (dispose)');
+    super.dispose();
+  }
+
   void _incrementCounter() {
     setState(() {
       // This call to setState tells the Flutter framework that something has
@@ -69,6 +86,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    // Runs EVERY time this screen redraws (first time + after every setState).
+    print('build() ran — counter is now $_counter');
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
     //
